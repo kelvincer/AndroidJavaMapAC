@@ -83,13 +83,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         for (int i = 0; i < results.size(); i++) {
             LatLng latLng = new LatLng(results.get(i).getGeometry().getLocation().getLat(), results.get(i).getGeometry().getLocation().getLng());
             Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory
-                    .defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-            ;
+                    .defaultMarker(BitmapDescriptorFactory.HUE_RED)).title(results.get(i).getName()));
             marker.setTag(i);
         }
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(results.get(0).getGeometry().getLocation().getLat(),
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(results.get(0).getGeometry().getLocation().getLat(),
                 results.get(0).getGeometry().getLocation().getLng()), 12.0f));
+        mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(this));
     }
 
 
